@@ -26,3 +26,168 @@ def psd_TEgraph(G,k):
     TEG = Graph([TEV,TEE])
     
     return TEG
+
+
+
+
+
+
+def skew_TEgraph(G,k):
+
+    ord=G.order()
+
+    V = G.vertices()
+
+    S = subsets(V,k)
+
+    TEV = []
+
+    TEE = []
+
+    ptm = -1
+
+    for s in S:
+
+       
+
+        ptms=prop_time_unlooped(G,s)
+
+        if (ptms > -1):
+
+            TEV.append(s)
+
+            
+
+            
+
+    N = len(TEV)
+
+                 
+
+    for i in range(N):
+
+           
+
+        for j in range(i+1,N):
+
+            L = len(list(set(TEV[i]) & set(TEV[j])))
+
+               
+
+            if L == k-1:
+
+                TEE.append((TEV[i],TEV[j]))
+
+   
+
+    
+
+    TEG = Graph(TEE)
+
+    return TEG
+
+def psd_TSgraph_ext(G,k):
+    ord=G.order()
+    V = G.vertices()
+    S = subsets(V,k)
+    TSV = []
+    TSE = []
+    ptm = -1
+    TSN = []
+    for s in S:
+       
+        ptms=pt_plus(G,s)
+        if (ptms > -1):
+            TSV.append(s)
+           
+           
+    N = len(TSV)
+                 
+    for i in range(N):
+           
+        for j in range(i+1,N):
+            L = len(list(set(TSV[i]) & set(TSV[j])))
+               
+            if L == k-1:
+                TSN = set(TSV[j]) - (set(TSV[i]) & set(TSV[j]))
+                for m in TSN:
+                    for q in set(TSV[i])- (set(TSV[i]) & set(TSV[j])):
+                        if m in G.neighbors(q):
+                            TSE.append((TSV[i],TSV[j]))
+   
+   
+    TSG = Graph([TSV,TSE],multiedges=False)
+    
+    return TSG
+
+def psd_TSgraph(G,k):
+    ord=G.order()
+    V = G.vertices()
+    S = subsets(V,k)
+    TSV = []
+    TSE = []
+    ptm = -1
+    TSN = []
+    for s in S:
+       
+        ptms=pt_plus(G,s)
+        if (ptms > -1):
+            TSV.append(s)
+           
+           
+    N = len(TSV)
+                 
+    for i in range(N):
+           
+        for j in range(i+1,N):
+            L = len(list(set(TSV[i]) & set(TSV[j])))
+               
+            if L == k-1:
+                TSN = set(TSV[j]) - (set(TSV[i]) & set(TSV[j]))
+                TSM = set(TSV[i]) - (set(TSV[i]) & set(TSV[j]))
+               
+                for m in TSN:
+                    for q in TSM:
+                        if m in G.neighbors(q):
+                            TSE.append((TSV[i],TSV[j]))
+                            
+   
+    TSG = Graph([TSV,TSE],multiedges=False)
+    
+    return TSG
+
+def std_TSgraph(G,k):
+    ord=G.order()
+    V = G.vertices()
+    S = subsets(V,k)
+    TSV = []
+    TSE = []
+    ptm = -1
+    TSN = []
+    for s in S:
+       
+        ptms=ptz(G,s)
+        if (ptms > -1):
+            TSV.append(s)
+           
+           
+    N = len(TSV)
+                 
+    for i in range(N):
+           
+        for j in range(i+1,N):
+            L = len(list(set(TSV[i]) & set(TSV[j])))
+               
+            if L == k-1:
+                TSN = set(TSV[j]) - (set(TSV[i]) & set(TSV[j]))
+                TSM = set(TSV[i]) - (set(TSV[i]) & set(TSV[j]))
+               
+                for m in TSN:
+                    for q in TSM:
+                        if m in G.neighbors(q):
+                            TSE.append((TSV[i],TSV[j]))
+                            
+   
+    TSG = Graph([TSV,TSE],multiedges=False)
+    
+    return TSG
