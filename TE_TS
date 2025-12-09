@@ -1,7 +1,7 @@
 def psd_TEgraph(G,k):
     ord=G.order()
     V = G.vertices()
-    S = subsets(V,k)
+    S = Subsets(V,k)
     TEV = []
     TEE = []
     ptm = -1
@@ -21,6 +21,9 @@ def psd_TEgraph(G,k):
                
             if L == k-1:
                 TEE.append((TEV[i],TEV[j]))
+    TEG = Graph([TEV,TEE],multiedges=False)
+    
+    return TEG            
 
 
 # F-2 other zero forcing functions (Leslie Hogben)
@@ -36,7 +39,7 @@ def Z(g):
 def ZFsets(G,k):
     ord=G.order()
     V = G.vertices()
-    S = subsets(V,k)
+    S = Subsets(V,k)
     ZFS=[]
     for s in S:
         A=zerosgame(G,s)
@@ -262,7 +265,7 @@ def skew_TEgraph(G,k):
 
     V = G.vertices()
 
-    S = subsets(V,k)
+    S = Subsets(V,k)
 
     TEV = []
 
@@ -313,7 +316,7 @@ def skew_TEgraph(G,k):
 def psd_TSgraph_ext(G,k):
     ord=G.order()
     V = G.vertices()
-    S = subsets(V,k)
+    S = Subsets(V,k)
     TSV = []
     TSE = []
     ptm = -1
@@ -347,7 +350,7 @@ def psd_TSgraph_ext(G,k):
 def psd_TSgraph(G,k):
     ord=G.order()
     V = G.vertices()
-    S = subsets(V,k)
+    S = Subsets(V,k)
     TSV = []
     TSE = []
     ptm = -1
@@ -383,7 +386,7 @@ def psd_TSgraph(G,k):
 def std_TSgraph(G,k):
     ord=G.order()
     V = G.vertices()
-    S = subsets(V,k)
+    S = Subsets(V,k)
     TSV = []
     TSE = []
     ptm = -1
