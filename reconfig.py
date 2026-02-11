@@ -58,9 +58,9 @@ def ZFsets(G,k):
 
 def ZFS_up_to_size_k(G,k):
     S=[]
-    for i in [Z(G)..k]:
+    for i in range(Z(G),k+1):
         ZFS_size_i=ZFsets(G,i)
-        S=S+ZFS_size_i
+        S=S.append(ZFS_size_i)
     return S
     
     
